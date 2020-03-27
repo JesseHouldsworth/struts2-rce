@@ -3,7 +3,7 @@ import groovy.json.*
 node () {
    def mvnHome, commitId
     
-   stage('Preparation') { // for display purposes
+   stage('Checkout code from GitHub') { // for display purposes
       // Get some code from a GitHub repository
       // git 'git@github.com:CMYanko/struts2-showcase-demo.git'
       checkout scm
@@ -19,7 +19,7 @@ node () {
       // sh "echo my commitid ${commitId}"
 
    }
-   stage('Build') {
+   stage('Build - compile source code into machine code') {
       // Run the maven build
       try{
         if (isUnix()) {
@@ -44,6 +44,12 @@ node () {
         postGitHub(commitId, 'success', 'build', 'Build succeeded')
       } */
       
+   }
+   stage('Deploy app to a test environment') {
+   }
+   stage('Run automated tests') {
+   }
+   stage('Deploy to production') {
    }
    
 }
