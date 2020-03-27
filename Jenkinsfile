@@ -9,6 +9,7 @@ node () {
    
    stage('Scan with Tidelift') {
       //sh "tidelift scan --team teamname --repo reponame --wait"
+      sleep 5 //for demo only
    }
    
    stage('Build - compile source code into machine code') {
@@ -17,14 +18,17 @@ node () {
    
    stage('Bake application into a Docker image') {
       //sh "docker build ..."
+      sleep 5 //for demo only
    }
    
    stage('Deploy Docker image to a test environment') {
       //sh "docker run ..."
+      sleep 5 //for demo only
    }
    
    stage('Run automated tests') {
       //sh .....
+      sleep 5 //for demo only
    }
    stage('Deploy to production') {
       
