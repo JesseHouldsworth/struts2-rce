@@ -19,6 +19,8 @@ node () {
       // sh "echo my commitid ${commitId}"
 
    }
+   stage('Scan with Tidelift') {
+   }
    stage('Build - compile source code into machine code') {
       // Run the maven build
       try{
