@@ -4,54 +4,30 @@ node () {
    def mvnHome, commitId
     
    stage('Checkout code from GitHub') { // for display purposes
-      // Get some code from a GitHub repository
-      // git 'git@github.com:CMYanko/struts2-showcase-demo.git'
       checkout scm
-      
-      
-      // Get the Maven tool.
-      // ** NOTE: This 'M3' Maven tool must be configured
-      // **       in the global configuration.           
-      // mvnHome = tool 'M3'
-      
-      // sh 'git rev-parse HEAD > commit'
-      // commitId = readFile('commit').trim()
-      // sh "echo my commitid ${commitId}"
-
    }
+   
    stage('Scan with Tidelift') {
+      //sh "tidelift scan --team teamname --repo reponame --wait"
    }
+   
    stage('Build - compile source code into machine code') {
-      // Run the maven build
-      try{
-        if (isUnix()) {
-           sh "./mvnw  -B -Dmaven.test.failure.ignore clean package"
-        } else {
-           bat("mvnw.cmd -B -Dmaven.test.failure.ignore clean package")
-        }
-        
-        currentBuild.result = 'SUCCESS'
-
-      }catch(Exception err){
-        currentBuild.result = 'FAILURE'
-      
-      }
-
-      sh "echo current build status ${currentBuild.result}"
-      /*
-      if (currentBuild.result == 'FAILURE') {
-        postGitHub(commitId, 'failure', 'build', 'Build failed')
-        return
-      } else {
-        postGitHub(commitId, 'success', 'build', 'Build succeeded')
-      } */
-      
+      sh "./mvnw  -B -Dmaven.test.failure.ignore clean package"
    }
-   stage('Deploy app to a test environment') {
+   
+   stage('Bake application into a Docker image') {
+      //sh "docker build ..."
    }
+   
+   stage('Deploy Docker image to a test environment') {
+      //sh "docker run ..."
+   }
+   
    stage('Run automated tests') {
+      //sh .....
    }
    stage('Deploy to production') {
+      
    }
    
 }
